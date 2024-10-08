@@ -1,0 +1,16 @@
+---
+- name: Playbook to download and install mergerfs
+  become: true
+  hosts: mediavm
+  
+  tasks : 
+    - name: Download mergerfs
+      ansible.builtin.get_url:
+        url: https://github.com/trapexit/mergerfs/releases/download/2.40.2/mergerfs_2.40.2.ubuntu-noble_amd64.deb
+        dest: /tmp/mergerfs
+  
+    - name: Install mergerfs
+      apt:
+        deb: /tmp/mergerfs/mergerfs_2.40.2.ubuntu-noble_amd64.deb
+      become: true
+
